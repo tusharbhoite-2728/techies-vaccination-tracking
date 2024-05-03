@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaccine Scheduler</title>
+    <style>
+           /* Reset default styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Global styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav ul li {
+      display: inline;
+      margin-right: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    p {
+      margin-bottom: 20px;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="date"] {
+      width: calc(100% - 16px); /* Adjust for input padding and border */
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      box-sizing: border-box;
+    }
+
+    button[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+        
+        form {
+            display: grid;
+            gap: 15px;
+        }
+        
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        input[type="date"],
+        select,
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        
+        #scheduleResult {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #f7f7f7;
+            border: 1px solid #ccc;
+        }
+        
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+          <li><a href="file:///C:/Users/TEJAS%20PRAKASH%20MORE/OneDrive/Pictures/Desktop/TEjas/bhave.html">Home</a></li>
+          <li><a href="file:///C:/Users/TEJAS%20PRAKASH%20MORE/OneDrive/Pictures/Desktop/TEjas/Untitled-2.html">Vaccine Information</a></li>
+          <li><a href="file:///C:/Users/TEJAS%20PRAKASH%20MORE/OneDrive/Pictures/Desktop/TEjas/tejas12.html">Vaccine Tracker </a></li>
+          <li><a href="file:///C:/Users/TEJAS%20PRAKASH%20MORE/OneDrive/Pictures/Desktop/TEjas/vaccine%20sch.html">Vaccine Schedule</a></li>
+          <li><a href="file:///C:/Users/TEJAS%20PRAKASH%20MORE/OneDrive/Pictures/Desktop/TEjas/Untitled-1.html">Contact</a></li>
+        </ul>
+      </nav>
+    <div class="container">
+        <h1>Vaccine Scheduler</h1>
+        <form id="vaccineForm">
+            <label for="childName">Child's Name:</label>
+            <input type="text" id="childName" required>
+            <label for="selectedDate">Select Date:</label>
+            <input type="date" id="selectedDate" required>
+            <label for="vaccineName">Select Vaccine:</label>
+            <select id="vaccineName" required>
+                <option value="hepB">Hepatitis B Vaccine</option>
+                <option value="dtapIpvHibPcvRv">DTaP, IPV, Hib, PCV, RV</option>
+                <option value="mmrVaricellaHepA">MMR, Varicella, Hepatitis A</option>
+                <option value="chickenpox">Chickenpox Vaccine</option>
+                <option value="hpv">HPV Vaccine</option>
+                <option value="poliio">Polio Vaccine</option>
+                <!-- Add more vaccine options as needed -->
+            </select>
+            <button type="submit">Schedule Vaccine</button>
+        </form>
+        <div id="scheduleResult"></div>
+    </div>
+    <script>
+        document.getElementById('vaccineForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+        
+            const selectedDate = document.getElementById('selectedDate').value;
+            const vaccineName = document.getElementById('vaccineName').value;
+        
+            const scheduledVaccine = scheduleVaccine(selectedDate, vaccineName);
+            
+            document.getElementById('scheduleResult').innerText = scheduledVaccine;
+        });
+        
+        function scheduleVaccine(selectedDate, vaccineName) {
+            const selectedDateObj = new Date(selectedDate);
+            let dueDate;
+            
+            switch (vaccineName) {
+                case 'hepB':
+                    dueDate = new Date(selectedDateObj.getTime() + (1 * 24 * 60 * 60 * 1000));
+                    break;
+                case 'dtapIpvHibPcvRv':
+                    dueDate = new Date(selectedDateObj.getTime() + (8 * 7 * 24 * 60 * 60 * 1000));
+                    break;
+                case 'mmrVaricellaHepA':
+                    dueDate = new Date(selectedDateObj.getTime() + (365 * 24 * 60 * 60 * 1000));
+                    break;
+                default:
+                    return 'Invalid vaccine name';
+            }
+        
+            const dueDateStr = dueDate.toISOString().split('T')[0];
+            return Scheduled ${vaccineName} on: ${dueDateStr};
+        }
+        
+    </script>
+</body>
+</html>

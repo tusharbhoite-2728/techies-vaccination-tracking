@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaccination Reminder</title>
+    <style>
+
+    /* Reset default styles */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+  
+      /* Global styles */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+      }
+  
+      nav {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 20px;
+      }
+  
+      nav ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+  
+      nav ul li {
+        display: inline;
+        margin-right: 20px;
+      }
+  
+      nav ul li a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+      }
+  
+      nav ul li a:hover {
+        text-decoration: underline;
+      }
+  
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+  
+      h2 {
+        margin-bottom: 10px;
+        color: #333;
+      }
+  
+      p {
+        margin-bottom: 20px;
+      }
+  
+      form {
+        margin-top: 20px;
+      }
+  
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+  
+      input[type="text"],
+      input[type="date"] {
+        width: calc(100% - 16px); /* Adjust for input padding and border */
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+      }
+  
+      button[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+  
+      button[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+
+             body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        
+        form {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        input[type="text"],
+        input[type="date"],
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        #reminderDisplay {
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+        }
+        
+    </style>
+</head>
+<body>
+
+        <nav>
+          <ul>
+            <li><a href="file:///C:/Users/ADMIN/OneDrive/Desktop/Techies/tecies.html">Home</a></li>
+            <li><a href="#">Vaccine Information</a></li>
+            <li><a href="file:///C:/Users/ADMIN/OneDrive/Desktop/n3.html">Vaccine Schedule  </a></li>
+            <li><a href="#">Profile</a></li>
+          </ul>
+        </nav>
+    <div class="container">
+        <h1>Vaccination Reminder</h1>
+        <form id="reminderForm">
+            <label for="childName">Child's Name:</label>
+            <input type="text" id="childName" required>
+            <label for="birthDate">Date of Birth:</label>
+            <input type="date" id="birthDate" required>
+            <button type="submit">Set Reminder</button>
+        </form>
+       <div id="reminderDisplay"></div>
+    </div>
+
+    <script>
+      const nodemailer=request('nodemailer');
+        document.getElementById('reminderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const childName = document.getElementById('childName').value;
+            const birthDate = document.getElementById('birthDate').value;
+            
+            const today = new Date();
+            const dob = new Date(birthDate);
+            const diffTime = Math.abs(today - dob);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        
+            const reminderDisplay = document.getElementById('reminderDisplay');
+            
+            let message = '';
+            if (diffDays >= 42) {
+                message = `${childName}'s vaccination is due. Schedule an appointment with the pediatrician.`;
+            } else {
+                const daysLeft = 42 - diffDays;
+                message = `${childName}'s next vaccination is due in ${daysLeft} days.`;
+            }
+        
+            // Send email
+            Email.send({
+                Host: "smtp.gmail.com",
+                Username: "sunnyd4060@gmail.com",
+                Password: "Bhavesh406",
+                To: 'bhaveshdhangar4060@gmail.com', // Replace this with the actual parent's email
+                From: "sunnyd4060@gmail.com",
+                Subject: "Vaccination Reminder",
+                Body: message
+            }).then(function(message) {
+                console.log('Email sent successfully!');
+                reminderDisplay.innerHTML = 'Email sent successfully!';
+            }).catch(function(error) {
+                console.error('Error sending email:', error);
+                reminderDisplay.innerHTML = 'Error sending email.';
+            });
+        });
+    </script>
+    
+</body>
+</html>

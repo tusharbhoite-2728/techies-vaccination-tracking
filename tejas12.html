@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaccination Tracker</title>
+    <style>
+
+        /* Reset default styles */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+  
+      /* Global styles */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+      }
+  
+      nav {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 20px;
+      }
+  
+      nav ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+  
+      nav ul li {
+        display: inline;
+        margin-right: 20px;
+      }
+  
+      nav ul li a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+      }
+  
+      nav ul li a:hover {
+        text-decoration: underline;
+      }
+  
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+  
+      h2 {
+        margin-bottom: 10px;
+        color: #333;
+      }
+  
+      p {
+        margin-bottom: 20px;
+      }
+  
+      form {
+        margin-top: 20px;
+      }
+  
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+  
+      input[type="text"],
+      input[type="date"] {
+        width: calc(100% - 16px); /* Adjust for input padding and border */
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+      }
+  
+      button[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+  
+      button[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+
+/* Reset default styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Global styles */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+
+  nav {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+  }
+
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  nav ul li {
+    display: inline;
+    margin-right: 20px;
+  }
+
+  nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  nav ul li a:hover {
+    text-decoration: underline;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  h2 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  p {
+    margin-bottom: 20px;
+  }
+
+  form {
+    margin-top: 20px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  input[type="text"],
+  input[type="date"] {
+    width: calc(100% - 16px); /* Adjust for input padding and border */
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+  }
+
+  button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+        
+        form {
+            display: grid;
+            gap: 15px;
+        }
+        
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        input[type="text"],
+        input[type="date"],
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        
+        #reminder {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #f7f7f7;
+            border: 1px solid #ccc;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+                margin: 30px auto;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+
+    <nav>
+        <ul>
+          <li><a href="file:///C:/Users/TEJAS%20PRAKASH%20MORE/OneDrive/Pictures/Desktop/TEjas/bhave.html">Home</a></li>
+          <li><a href="file:///C:/Users/TEJAS%20PRAKASH%20MORE/OneDrive/Pictures/Desktop/TEjas/Untitled-2.html">Vaccine Information</a></li>
+          <li><a href="file:///C:/Users/TEJAS%20PRAKASH%20MORE/OneDrive/Pictures/Desktop/TEjas/tejas12.html">Vaccine Tracker </a></li>
+          <li><a href="file:///C:/Users/TEJAS%20PRAKASH%20MORE/OneDrive/Pictures/Desktop/TEjas/vaccine%20sch.html">Vaccine Schedule</a></li>
+          <li><a href="file:///C:/Users/TEJAS%20PRAKASH%20MORE/OneDrive/Pictures/Desktop/TEjas/Untitled-1.html">Contact</a></li>
+        </ul>
+      </nav>
+    <div class="container">
+        <h1>Vaccination Tracker</h1>
+        <form id="vaccineForm">
+            <label for="childName">Child's Name:</label>
+            <input type="text" id="childName" required>
+            <label for="birthdate">Birthdate:</label>
+            <input type="date" id="birthdate" required>
+            <button type="submit">Submit</button>
+        </form>
+        <div id="reminder"></div>
+    </div>
+    <script >
+        document.getElementById('vaccineForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const childName = document.getElementById('childName').value;
+            const birthdate = document.getElementById('birthdate').value;
+        
+            // Mock API call to calculate reminder (replace with actual logic)
+            const reminder = calculateReminder(birthdate);
+        
+            document.getElementById('reminder').innerHTML = Reminder for ${childName}: ${reminder};
+        });
+        
+        function calculateReminder(birthdate) {
+            // Example logic to calculate reminder based on birthdate
+            // You can implement your own logic or integrate with a backend/API
+            
+            // For demonstration, we'll use a static reminder
+            return "Vaccine 1 - Due in 1 month";
+        }
+        
+    </script>
+    <footer class="footer">&copy; Copyright Techies</footer>
+</body>
+</html>

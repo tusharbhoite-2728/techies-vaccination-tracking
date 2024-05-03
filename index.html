@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vaccination Reminder</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Vaccination Reminder</h1>
+    <form id="reminderForm" action="http://localhost:3000/sendReminder" method="POST">
+      <label for="childName">Child's Name:</label>
+      <input type="text" id="childName" name="childName" required>
+      <label for="birthDate">Date of Birth:</label>
+      <input type="date" id="birthDate" name="birthDate" required>
+      <label for="parentEmail">Parent's Email:</label>
+      <input type="email" id="parentEmail" name="parentEmail" required>
+      <button type="submit">Set Reminder</button>
+    </form>
+    <div id="reminderDisplay"></div>
+  </div>
+​
+  <script>
+    document.getElementById('reminderForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+​
+      fetch('http://localhost:3000/sendReminder', {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('reminderDisplay').textContent = data;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          document.getElementById('reminderDisplay').textContent = 'Error sending reminder.';
+        });
+    });
+  </script>
+</body>
+</html>
